@@ -17,7 +17,6 @@ repositories {
 }
 
 version = "0.1.1"
-group = 'com.dtx12'
 
 android {
     compileSdkVersion 22

@@ -146,7 +146,7 @@ public final class Interpolations {
     public static final Interpolator SineEaseOut = new Interpolator() {
         @Override
         public float getInterpolation(float t) {
-            return (float) sin(t * PI/2);
+            return (float) sin(t * PI / 2);
         }
     };
 
@@ -212,14 +212,14 @@ public final class Interpolations {
     public static final Interpolator ElasticEaseIn = new Interpolator() {
         @Override
         public float getInterpolation(float t) {
-            return (float) (sin(13.0 * PI/2 * t) * pow(2.0, 10.0 * (t - 1.0)));
+            return (float) (sin(13.0 * PI / 2 * t) * pow(2.0, 10.0 * (t - 1.0)));
         }
     };
 
     public static final Interpolator ElasticEaseOut = new Interpolator() {
         @Override
         public float getInterpolation(float t) {
-            return (float) (sin(-13.0 * PI/2 * (t + 1.0)) * pow(2.0, -10.0 * t) + 1.0);
+            return (float) (sin(-13.0 * PI / 2 * (t + 1.0)) * pow(2.0, -10.0 * t) + 1.0);
         }
     };
 
@@ -292,14 +292,6 @@ public final class Interpolations {
             }
         }
     };
-
-    public static final Interpolator BounceEaseIn = new Interpolator() {
-        @Override
-        public float getInterpolation(float t) {
-            return 1.0f - BounceEaseOut.getInterpolation(1.0f - t);
-        }
-    };
-
     public static final Interpolator BounceEaseOut = new Interpolator() {
         @Override
         public float getInterpolation(float t) {
@@ -317,7 +309,12 @@ public final class Interpolations {
             }
         }
     };
-
+    public static final Interpolator BounceEaseIn = new Interpolator() {
+        @Override
+        public float getInterpolation(float t) {
+            return 1.0f - BounceEaseOut.getInterpolation(1.0f - t);
+        }
+    };
     public static final Interpolator BounceEaseInOut = new Interpolator() {
         @Override
         public float getInterpolation(float t) {
