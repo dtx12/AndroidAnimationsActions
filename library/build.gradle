@@ -16,7 +16,7 @@ repositories {
     jcenter()
 }
 
-version = "0.1.0"
+version = "0.1.1"
 group = 'com.dtx12'
 
 android {
@@ -63,6 +63,8 @@ install {
         pom {
             project {
                 packaging 'aar'
+                groupId 'com.dtx12'
+                artifactId 'animations-actions'
                 name "Android Animations as Actions"
                 description 'Actions for android animations. Inspired by libgdx scene2d actions.'
                 url 'https://github.com/dtx12/AndroidAnimationsActions'
