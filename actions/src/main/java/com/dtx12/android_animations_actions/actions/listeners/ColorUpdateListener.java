@@ -22,8 +22,28 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library;
+package com.dtx12.android_animations_actions.actions.listeners;
 
-enum ActionType {
-    ALPHA, SCALE_TO, SCALE_BY, SIZE_TO, SIZE_BY, ROTATE_TO, ROTATE_BY, COLOR, MOVE_TO, MOVE_BY
+import android.animation.ValueAnimator;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.view.View;
+
+public class ColorUpdateListener extends BaseUpdateListener {
+
+    private Paint paint;
+
+    public ColorUpdateListener(View view) {
+        super(view);
+        paint = new Paint();
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, paint);
+    }
+
+    @Override
+    void onAnimationUpdate(View view, ValueAnimator animation) {
+        int currentColor = (int) animation.getAnimatedValue();
+        paint.setColorFilter(new PorterDuffColorFilter(currentColor, PorterDuff.Mode.MULTIPLY));
+        view.invalidate();
+    }
 }

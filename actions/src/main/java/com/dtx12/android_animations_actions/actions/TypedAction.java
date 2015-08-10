@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library;
+package com.dtx12.android_animations_actions.actions;
 
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.view.View;
-import com.dtx12.android_animations_actions.library.listeners.*;
+import com.dtx12.android_animations_actions.actions.listeners.*;
 
 class TypedAction extends ValueAnimator {
     private ActionType type;

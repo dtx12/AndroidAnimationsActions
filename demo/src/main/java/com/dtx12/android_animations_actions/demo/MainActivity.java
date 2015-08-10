@@ -8,11 +8,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.dtx12.android_animations_actions.library.Interpolations;
+import com.dtx12.android_animations_actions.actions.Interpolations;
 
 import java.util.Random;
 
-import static com.dtx12.android_animations_actions.library.Actions.*;
+import static com.dtx12.android_animations_actions.actions.Actions.*;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library.listeners;
+package com.dtx12.android_animations_actions.actions.listeners;
 
 import android.animation.ValueAnimator;
 import android.view.View;

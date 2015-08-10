@@ -22,28 +22,19 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library.listeners;
+package com.dtx12.android_animations_actions.actions.listeners;
 
 import android.animation.ValueAnimator;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.view.View;
 
-public class ColorUpdateListener extends BaseUpdateListener {
-
-    private Paint paint;
-
-    public ColorUpdateListener(View view) {
+public class AlphaUpdateListener extends BaseUpdateListener {
+    public AlphaUpdateListener(View view) {
         super(view);
-        paint = new Paint();
-        view.setLayerType(View.LAYER_TYPE_SOFTWARE, paint);
     }
 
     @Override
     void onAnimationUpdate(View view, ValueAnimator animation) {
-        int currentColor = (int) animation.getAnimatedValue();
-        paint.setColorFilter(new PorterDuffColorFilter(currentColor, PorterDuff.Mode.MULTIPLY));
-        view.invalidate();
+        float alpha = (float) animation.getAnimatedValue();
+        view.setAlpha(alpha);
     }
 }

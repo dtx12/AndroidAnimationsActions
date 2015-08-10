@@ -1,4 +1,4 @@
-package com.dtx12.android_animations_actions.library;
+package com.dtx12.android_animations_actions.actions;
 
 import android.view.animation.Interpolator;
 

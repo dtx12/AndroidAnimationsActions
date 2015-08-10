@@ -22,22 +22,21 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library.listeners;
+package com.dtx12.android_animations_actions.actions.listeners;
 
 import android.animation.ValueAnimator;
 import android.view.View;
 
-abstract class BaseUpdateListener implements ValueAnimator.AnimatorUpdateListener {
-    private final View view;
-
-    public BaseUpdateListener(View view) {
-        this.view = view;
+public class ScaleUpdateListener extends BaseUpdateListener {
+    public ScaleUpdateListener(View view) {
+        super(view);
     }
 
     @Override
-    public final void onAnimationUpdate(ValueAnimator animation) {
-        onAnimationUpdate(view, animation);
+    void onAnimationUpdate(View view, ValueAnimator animation) {
+        float scaleX = (float) animation.getAnimatedValue("scaleX");
+        float scaleY = (float) animation.getAnimatedValue("scaleY");
+        view.setScaleX(scaleX);
+        view.setScaleY(scaleY);
     }
-
-    abstract void onAnimationUpdate(View view, ValueAnimator animation);
 }

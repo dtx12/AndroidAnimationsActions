@@ -22,21 +22,8 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.library.listeners;
+package com.dtx12.android_animations_actions.actions;
 
-import android.animation.ValueAnimator;
-import android.view.View;
-
-public class ScaleUpdateListener extends BaseUpdateListener {
-    public ScaleUpdateListener(View view) {
-        super(view);
-    }
-
-    @Override
-    void onAnimationUpdate(View view, ValueAnimator animation) {
-        float scaleX = (float) animation.getAnimatedValue("scaleX");
-        float scaleY = (float) animation.getAnimatedValue("scaleY");
-        view.setScaleX(scaleX);
-        view.setScaleY(scaleY);
-    }
+enum ActionType {
+    ALPHA, SCALE_TO, SCALE_BY, SIZE_TO, SIZE_BY, ROTATE_TO, ROTATE_BY, COLOR, MOVE_TO, MOVE_BY
 }
