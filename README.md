@@ -7,6 +7,8 @@ You may create animations like below with just a couple lines of code.
 # Demo
 ![](http://i.imgur.com/EueRBrp.gif)
 
+For better quality please check package demo in project.
+
 ## Gradle
 ```java
 repositories {
