@@ -25,6 +25,7 @@
 package com.dtx12.android_animations_actions.actions;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.support.annotation.NonNull;
@@ -43,30 +44,15 @@ public final class Actions {
 
     @NonNull
     public static Animator forever(@NonNull Animator animator) {
-        return repeat(Integer.MAX_VALUE, animator);
+        return repeat(-1, animator);
     }
 
     @NonNull
     public static Animator repeat(final int count, @NonNull Animator animator) {
-        if (count <= 1)
+        if (count <= 1 && count != -1)
             return animator;
-        AnimatorSet set = new AnimatorSet();
-        set.playSequentially(animator);
-        final boolean forever = count == Integer.MAX_VALUE;
-        set.addListener(new SimpleAnimatorListener() {
-            private int currentIndex = 1;
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (currentIndex < count || forever) {
-                    if (!forever) {
-                        currentIndex++;
-                    }
-                    animation.start();
-                }
-            }
-        });
-        return set;
+        return new RepeatAction(count, animator);
     }
 
     @NonNull
@@ -92,7 +78,7 @@ public final class Actions {
     public static Animator run(@NonNull final Runnable runnable) {
         ValueAnimator animator = new ValueAnimator();
         animator.setIntValues(1);
-        animator.addListener(new SimpleAnimatorListener() {
+        animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 runnable.run();
