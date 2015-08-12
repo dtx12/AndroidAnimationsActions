@@ -3,5 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="animation">Play animation</string>
+    <string name="animation.first">First animation</string>
+    <string name="animation.second">Second animation</string>
 </resources>
