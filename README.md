@@ -20,6 +20,9 @@ You may create animations like in demo with just a couple lines of code.
 <b>repeat</b> - repeating of selected action <br/>
 <b>forever</b> - infinite repeating of selected action <br/>
 
+##Interpolations
+Library contains class `Interpolations` with a different predefined interpolations which may be useful for animations.
+
 ## Demo
 For better quality please check package demo in project.
 ![](http://i.imgur.com/EueRBrp.gif)
