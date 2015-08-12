@@ -2,7 +2,7 @@
 Actions for android animations. Inspired by libgdx scene2d actions.
 
 The main goal of this project is making creating of complex animation easier.
-You may create animations like below with just a couple lines of code.
+You may create animations like in demo with just a couple lines of code.
 
 #Actions
 <b>sequence</b> - chains actions to sequence <br/>
