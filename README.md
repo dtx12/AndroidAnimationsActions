@@ -22,6 +22,8 @@ You may create animations like in demo with just a couple lines of code.
 <b>repeat</b> - repeats action using defined number of times <br/>
 <b>forever</b> - repeats action infinite <br/>
 
+<b>play</b> - plays specified action on specified view<br/>
+
 ##Interpolations
 Library contains class `Interpolations` with a different predefined interpolations which may be useful for animations.
 
