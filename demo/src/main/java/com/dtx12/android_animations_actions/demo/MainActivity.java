@@ -75,11 +75,16 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             play(sequence(parallel(fadeOut(), color(-1, Color.BLUE)), moveTo(center.x, center.y),
-                    fadeIn(.5f), moveTo(newPos.x, newPos.y, 1, Interpolations.ExponentialEaseOut),
+                    fadeIn(.5f), parallel(moveTo(newPos.x, newPos.y, 1, Interpolations.ExponentialEaseOut)), run(new Runnable() {
+                        @Override
+                        public void run() {
+                            play(sequence(color(Color.BLUE, Color.GREEN, .1f), forever(sequence(color(Color.GREEN, Color.RED, 1), color(Color.GREEN, Color.RED, 1)))), view);
+                        }
+                    }),
                     parallel(rotateBy(720, 2, Interpolations.BackEaseOut), sequence(scaleTo(.5f, .5f, 1, Interpolations.BackEaseOut),
                             scaleTo(1, 1, 1, Interpolations.ElasticEaseOut))), sequence(delay(delay), parallel(fadeOut(.5f, Interpolations.ExponentialEaseOut),
                             scaleTo(0, 1, .5f, Interpolations.ExponentialEaseOut)))), view);
-            delay += .5f;
+            delay += 1f;
             secondAnimContainer.addView(view);
         }
     }
