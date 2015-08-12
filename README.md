@@ -4,7 +4,7 @@ Actions for android animations. Inspired by libgdx scene2d actions.
 The main goal of this project is making creating of complex animation easier.
 You may create animations like in demo with just a couple lines of code.
 
-#Actions
+##Actions
 <b>sequence</b> - chains actions to sequence <br/>
 <b>delay</b> - inserts pause into sequence <br/>
 <b>run</b> - will run target runnable, useful in sequences <br/>
@@ -20,7 +20,7 @@ You may create animations like in demo with just a couple lines of code.
 <b>repeat</b> - repeating of selected action <br/>
 <b>forever</b> - infinite repeating of selected action <br/>
 
-# Demo
+## Demo
 For better quality please check package demo in project.
 ![](http://i.imgur.com/EueRBrp.gif)
 
