@@ -5,20 +5,20 @@ The main goal of this project is making creating of complex animation easier.
 You may create animations like below with just a couple lines of code.
 
 #Actions
-sequence - chains actions to sequence
-delay - inserts pause into sequence
-run - will target runnable, useful in sequences
-parallel - will run actions in parallel
-color - color animation for view
-scaleTo - scales view to defined values
-scaleBy - scales view by defined values
-alpha - alpha animation
-fadeIn - fade in animation
-fadeOut - fade out animation
-rotateTo - rotates view to defined degree
-rotateBy - rotates view by defined degree
-repeat - repeating of selected action
-forever - infinite repeating of selected action
+sequence - chains actions to sequence <br/>
+delay - inserts pause into sequence <br/>
+run - will run target runnable, useful in sequences <br/>
+parallel - will run actions in parallel <br/>
+color - color animation for view <br/>
+scaleTo - scales view to defined values <br/>
+scaleBy - scales view by defined values <br/>
+alpha - alpha animation <br/>
+fadeIn - fade in animation <br/>
+fadeOut - fade out animation <br/>
+rotateTo - rotates view to defined degree <br/>
+rotateBy - rotates view by defined degree <br/>
+repeat - repeating of selected action <br/>
+forever - infinite repeating of selected action <br/>
 
 # Demo
 For better quality please check package demo in project.
