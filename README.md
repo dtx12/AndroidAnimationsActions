@@ -17,6 +17,8 @@ You may create animations like in demo with just a couple lines of code.
 <b>fadeOut</b> - fade out animation <br/>
 <b>rotateTo</b> - rotates view to defined degree <br/>
 <b>rotateBy</b> - rotates view by defined degree <br/>
+<b>moveTo</b> - moves view to defined x, y<br/>
+<b>moveBy</b> - moves view by defined x, y<br/>
 <b>repeat</b> - repeating of selected action <br/>
 <b>forever</b> - infinite repeating of selected action <br/>
 
