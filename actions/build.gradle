@@ -50,6 +50,7 @@ bintray {
         issueTrackerUrl = 'https://github.com/dtx12/AndroidAnimationsActions/issues'
         labels = ['android', 'animations', 'actions']
         publicDownloadNumbers = true
+        publish = true
     }
 }
 

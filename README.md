@@ -34,6 +34,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.dtx12:actions:0.1.2'
+    compile 'com.dtx12:actions:0.1.3'
 }
 ```
