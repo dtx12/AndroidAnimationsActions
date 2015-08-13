@@ -5,24 +5,24 @@ The main goal of this project is making creating of complex animations easier.
 You may create animations like in demo with just a couple lines of code.
 
 ##Actions
-<b>sequence</b> - executes actions sequentially <br/>
-<b>delay</b> - inserts pause into sequence <br/>
-<b>run</b> - will run target runnable, useful in sequences <br/>
-<b>parallel</b> - executes actions at the same time <br/>
-<b>color</b> - color animation for view <br/>
-<b>scaleTo</b> - scales view to defined values <br/>
-<b>scaleBy</b> - scales view by defined values <br/>
-<b>alpha</b> - alpha animation <br/>
-<b>fadeIn</b> - fades alpha to 1 <br/>
-<b>fadeOut</b> - fades alpha to 0<br/>
-<b>rotateTo</b> - rotates view to defined degree <br/>
-<b>rotateBy</b> - rotates view by defined degree <br/>
-<b>moveTo</b> - moves view to defined x, y<br/>
-<b>moveBy</b> - moves view by defined x, y<br/>
-<b>repeat</b> - repeats action using defined number of times <br/>
-<b>forever</b> - repeats action infinite <br/>
+`sequence` - executes actions sequentially <br/>
+`delay` - inserts pause into sequence <br/>
+`run` - will run target runnable, useful in sequences <br/>
+`parallel` - executes actions at the same time <br/>
+`color` - color animation for view <br/>
+`scaleTo` - scales view to defined values <br/>
+`scaleBy` - scales view by defined values <br/>
+`alpha` - alpha animation <br/>
+`fadeIn` - fades alpha to 1 <br/>
+`fadeOut` - fades alpha to 0<br/>
+`rotateTo` - rotates view to defined degree <br/>
+`rotateBy` - rotates view by defined degree <br/>
+`moveTo` - moves view to defined x, y<br/>
+`moveBy` - moves view by defined x, y<br/>
+`repeat` - repeats action using defined number of times <br/>
+`forever` - repeats action infinite <br/>
 
-<b>play</b> - plays specified action on specified view<br/>
+`play` - plays specified action on specified view<br/>
 
 ##Interpolations
 Library contains class `Interpolations` with a different predefined interpolations which may be useful for animations.
