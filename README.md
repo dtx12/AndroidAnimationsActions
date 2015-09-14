@@ -25,7 +25,7 @@ You may create animations like in demo with just a couple lines of code.
 `play` - plays specified action on specified view<br/>
 
 ##Interpolations
-Library contains class `Interpolations` with a different predefined interpolations which may be useful for animations.
+Library contains class `Interpolations` with different predefined interpolations which may be useful for animations.
 
 ## Demo
 For better quality please check package demo in project.
