@@ -1,3 +1,5 @@
+[![Android Gems](http://www.android-gems.com/badge/dtx12/AndroidAnimationsActions.svg?branch=master)](http://www.android-gems.com/lib/dtx12/AndroidAnimationsActions)
+
 # Android Animations Actions
 Actions for android animations. Inspired by libgdx scene2d actions.
 
