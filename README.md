@@ -40,6 +40,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.dtx12:actions:0.1.3'
+    compile 'com.dtx12:actions:0.1.4'
 }
 ```
