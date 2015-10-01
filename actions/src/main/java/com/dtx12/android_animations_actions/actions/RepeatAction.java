@@ -69,10 +69,15 @@ class RepeatAction extends ValueAnimator {
 
     @Override
     public void setTarget(Object target) {
+        animator.setTarget(target);
+        setTargetInternal(target, animator);
+    }
+
+    private void setTargetInternal(Object target, Animator animator) {
         if (animator instanceof AnimatorSet) {
             AnimatorSet set = ((AnimatorSet) animator);
             for (Animator child : set.getChildAnimations()) {
-                child.setTarget(target);
+                setTargetInternal(target, child);
             }
         } else {
             animator.setTarget(target);
