@@ -30,7 +30,7 @@ You may create animations like in demo with just a couple lines of code.
 Library contains class `Interpolations` with different predefined interpolations which may be useful for animations.
 
 ## Demo
-For better quality please check package demo in project.
+For better quality please check package demo in the project.
 ![](http://i.imgur.com/EueRBrp.gif)
 
 ## Gradle
