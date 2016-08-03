@@ -1,16 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-
-repositories {
-    jcenter()
-}
+// apply plugin: 'com.jfrog.bintray'
 
 version = "0.1.4"
 group = "com.dtx12"
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         minSdkVersion 14
@@ -26,22 +22,22 @@ android {
     }
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    configurations = ['archives']
-    pkg {
-        repo = 'maven'
-        name = 'animations-actions'
-        desc = 'Actions for android animations. Inspired by libgdx scene2d actions.'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/dtx12/AndroidAnimationsActions.git'
-        issueTrackerUrl = 'https://github.com/dtx12/AndroidAnimationsActions/issues'
-        labels = ['android', 'animations', 'actions']
-        publicDownloadNumbers = true
-        publish = true
-    }
-}
+//bintray {
+//    user = System.getenv('BINTRAY_USER')
+//    key = System.getenv('BINTRAY_KEY')
+//    configurations = ['archives']
+//    pkg {
+//        repo = 'maven'
+//        name = 'animations-actions'
+//        desc = 'Actions for android animations. Inspired by libgdx scene2d actions.'
+//        licenses = ['MIT']
+//        vcsUrl = 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//        issueTrackerUrl = 'https://github.com/dtx12/AndroidAnimationsActions/issues'
+//        labels = ['android', 'animations', 'actions']
+//        publicDownloadNumbers = true
+//        publish = true
+//    }
+//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
