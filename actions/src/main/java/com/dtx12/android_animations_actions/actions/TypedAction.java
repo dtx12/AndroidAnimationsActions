@@ -27,7 +27,14 @@ package com.dtx12.android_animations_actions.actions;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.view.View;
-import com.dtx12.android_animations_actions.actions.listeners.*;
+import android.view.ViewGroup;
+
+import com.dtx12.android_animations_actions.actions.listeners.AlphaUpdateListener;
+import com.dtx12.android_animations_actions.actions.listeners.ColorUpdateListener;
+import com.dtx12.android_animations_actions.actions.listeners.MoveUpdateListener;
+import com.dtx12.android_animations_actions.actions.listeners.RotationUpdateListener;
+import com.dtx12.android_animations_actions.actions.listeners.ScaleUpdateListener;
+import com.dtx12.android_animations_actions.actions.listeners.SizeUpdateListener;
 
 class TypedAction extends ValueAnimator {
     private ActionType type;
@@ -79,8 +86,10 @@ class TypedAction extends ValueAnimator {
                 prepareScaleAnimation(true);
                 break;
             case SIZE_TO:
+                prepareSizeAnimation(false);
                 break;
             case SIZE_BY:
+                prepareSizeAnimation(true);
                 break;
             case ROTATE_TO:
                 prepareRotateAnimation(false);
@@ -98,6 +107,16 @@ class TypedAction extends ValueAnimator {
                 prepareMoveAnimation(true);
                 break;
         }
+    }
+
+    private void prepareSizeAnimation(boolean sizeBy) {
+        final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        float sizeXOffset = sizeBy ? layoutParams.width : 0;
+        float sizeYOffset = sizeBy ? layoutParams.height : 0;
+        PropertyValuesHolder x = PropertyValuesHolder.ofFloat("x", layoutParams.width, sizeXOffset + floatTargets[0]);
+        PropertyValuesHolder y = PropertyValuesHolder.ofFloat("y", layoutParams.height, sizeYOffset + floatTargets[1]);
+        setValues(x, y);
+        addUpdateListener(new SizeUpdateListener(view));
     }
 
     private void prepareColorAnimation() {

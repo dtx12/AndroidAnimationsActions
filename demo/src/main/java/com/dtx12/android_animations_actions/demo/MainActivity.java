@@ -9,14 +9,30 @@ import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.dtx12.android_animations_actions.actions.Interpolations;
 
 import java.util.Random;
 
-import static com.dtx12.android_animations_actions.actions.Actions.*;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.dtx12.android_animations_actions.actions.Actions.color;
+import static com.dtx12.android_animations_actions.actions.Actions.delay;
+import static com.dtx12.android_animations_actions.actions.Actions.fadeIn;
+import static com.dtx12.android_animations_actions.actions.Actions.fadeOut;
+import static com.dtx12.android_animations_actions.actions.Actions.forever;
+import static com.dtx12.android_animations_actions.actions.Actions.moveBy;
+import static com.dtx12.android_animations_actions.actions.Actions.moveTo;
+import static com.dtx12.android_animations_actions.actions.Actions.parallel;
+import static com.dtx12.android_animations_actions.actions.Actions.play;
+import static com.dtx12.android_animations_actions.actions.Actions.rotateBy;
+import static com.dtx12.android_animations_actions.actions.Actions.run;
+import static com.dtx12.android_animations_actions.actions.Actions.scaleTo;
+import static com.dtx12.android_animations_actions.actions.Actions.sequence;
+import static com.dtx12.android_animations_actions.actions.Actions.sizeBy;
+import static com.dtx12.android_animations_actions.actions.Actions.sizeTo;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     protected LinearLayout firstAnimContainer;
     @Bind(R.id.secondAnimContainer)
     protected FrameLayout secondAnimContainer;
+    @Bind(R.id.thirdAnimContainer)
+    protected FrameLayout thirdAnimContainer;
     private Random random = new Random();
 
     @Override
@@ -34,10 +52,15 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.playSecondAnim)
-    protected void playSecondAnim() {
+    private void reset() {
         firstAnimContainer.removeAllViews();
         secondAnimContainer.removeAllViews();
+        thirdAnimContainer.removeAllViews();
+    }
+
+    @OnClick(R.id.playSecondAnim)
+    protected void playSecondAnim() {
+        reset();
         Point center = new Point(secondAnimContainer.getMeasuredWidth() / 2, secondAnimContainer.getMeasuredHeight() / 2);
         int size = getResources().getDimensionPixelSize(R.dimen.circle_size);
         float delay = 0;
@@ -89,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.playFirstAnim)
     protected void playFirstAnimation() {
-        firstAnimContainer.removeAllViews();
-        secondAnimContainer.removeAllViews();
+        reset();
+
         for (int i = 0; i < 6; i++) {
             int size = getResources().getDimensionPixelSize(R.dimen.circle_size);
             int margin = getResources().getDimensionPixelSize(R.dimen.circle_margin);
@@ -108,5 +131,28 @@ public class MainActivity extends AppCompatActivity {
                             scaleTo(1, 1, 2, Interpolations.ElasticEaseOut))), view);
             firstAnimContainer.addView(view);
         }
+    }
+
+    @OnClick(R.id.playThirdAnim)
+    protected void playThirdAnimation() {
+        reset();
+
+        int size = getResources().getDimensionPixelSize(R.dimen.circle_size);
+        int margin = getResources().getDimensionPixelSize(R.dimen.circle_margin);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+        params.leftMargin = margin;
+        params.rightMargin = margin;
+        params.gravity = Gravity.CENTER;
+        ImageView view = new ImageView(this);
+        view.setLayoutParams(params);
+        view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.circle));
+        thirdAnimContainer.addView(view);
+
+        float targetX = thirdAnimContainer.getWidth() / 2f;
+        float targetY = thirdAnimContainer.getHeight() / 2f - size / 2;
+
+        play(sequence(color(-1, Color.GREEN), moveTo(targetX, targetY)), view);
+
+        play(forever(sequence(sizeTo(size * 2, size * 2, 1f), (sizeBy(size, size, 1f)))), view);
     }
 }

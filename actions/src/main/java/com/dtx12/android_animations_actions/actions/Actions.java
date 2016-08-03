@@ -239,16 +239,26 @@ public final class Actions {
     }
 
     @NonNull
-    public static Animator resizeBy(float x, float y, float duration, @Nullable Interpolator interpolator) {
-        return resize(x, y, duration, interpolator, ActionType.RESIZE_BY);
+    public static Animator sizeBy(float x, float y, float duration) {
+        return sizeBy(x, y, duration, null);
     }
-    @NonNull
-    public static Animator resizeTo(float x, float y, float duration, @Nullable Interpolator interpolator) {
-        return resize(x, y, duration, interpolator, ActionType.RESIZE_TO);
+
+    public static Animator sizeBy(float x, float y, float duration, @Nullable Interpolator interpolator) {
+        return size(x, y, duration, interpolator, ActionType.SIZE_BY);
     }
 
     @NonNull
-    private static Animator resize(float x, float y, float duration, @Nullable Interpolator interpolator, @NonNull ActionType type) {
+    public static Animator sizeTo(float x, float y, float duration) {
+        return sizeTo(x, y, duration, null);
+    }
+
+    @NonNull
+    public static Animator sizeTo(float x, float y, float duration, @Nullable Interpolator interpolator) {
+        return size(x, y, duration, interpolator, ActionType.SIZE_TO);
+    }
+
+    @NonNull
+    private static Animator size(float x, float y, float duration, @Nullable Interpolator interpolator, @NonNull ActionType type) {
         TypedAction action = new TypedAction();
         setPropertiesForAnimator(action, duration, interpolator);
         action.setFloatTargets(x, y);

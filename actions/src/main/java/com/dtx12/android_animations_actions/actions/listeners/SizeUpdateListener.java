@@ -22,8 +22,25 @@
  * SOFTWARE.
  */
 
-package com.dtx12.android_animations_actions.actions;
+package com.dtx12.android_animations_actions.actions.listeners;
 
-enum ActionType {
-    ALPHA, SCALE_TO, SCALE_BY, SIZE_TO, SIZE_BY, ROTATE_TO, ROTATE_BY, COLOR, MOVE_TO, MOVE_BY
+import android.animation.ValueAnimator;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class SizeUpdateListener extends BaseUpdateListener {
+
+    public SizeUpdateListener(View view) {
+        super(view);
+    }
+
+    @Override
+    void onAnimationUpdate(View view, ValueAnimator animation) {
+        float x = (float) animation.getAnimatedValue("x");
+        float y = (float) animation.getAnimatedValue("y");
+        final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = (int) x;
+        layoutParams.height = (int) y;
+        view.requestLayout();
+    }
 }

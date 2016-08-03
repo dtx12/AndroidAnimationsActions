@@ -27,6 +27,15 @@
         android:clipToPadding="false"
         android:layout_centerHorizontal="true"/>
 
+    <FrameLayout
+        android:id="@+id/thirdAnimContainer"
+        android:layout_above="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_centerHorizontal="true"/>
+
     <LinearLayout
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:id="@+id/buttonsContainer"
@@ -48,6 +57,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/animation.second"/>
+        <Button
+            android:id="@+id/playThirdAnim"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/animation.third"/>
 
     </LinearLayout>
 </RelativeLayout>
