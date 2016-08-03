@@ -1,16 +1,5 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
-    }
-}
 apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 
 repositories {
     jcenter()
@@ -20,12 +9,12 @@ version = "0.1.4"
 group = "com.dtx12"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 24
+    buildToolsVersion "24"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -56,44 +45,44 @@ bintray {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:24.1.1'
 }
 
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                groupId 'com.dtx12'
-                artifactId 'actions'
-                name "Android Animations as Actions"
-                description 'Actions for android animations. Inspired by libgdx scene2d actions.'
-                url 'https://github.com/dtx12/AndroidAnimationsActions'
-
-                developers {
-                    developer {
-                        id 'dtx12'
-                        name 'Bogdan Kiselev'
-                        email 'dtx1212@gmail.com'
-                    }
-                }
-
-                licenses {
-                    license {
-                        name 'MIT'
-                        url 'http://opensource.org/licenses/mit-license.php'
-                    }
-                }
-
-                scm {
-                    url 'https://github.com/dtx12/AndroidAnimationsActions'
-                    connection 'https://github.com/dtx12/AndroidAnimationsActions.git'
-                    developerConnection 'https://github.com/dtx12/AndroidAnimationsActions.git'
-                }
-            }
-        }
-    }
-}
+//install {
+//    repositories.mavenInstaller {
+//        pom {
+//            project {
+//                packaging 'aar'
+//                groupId 'com.dtx12'
+//                artifactId 'actions'
+//                name "Android Animations as Actions"
+//                description 'Actions for android animations. Inspired by libgdx scene2d actions.'
+//                url 'https://github.com/dtx12/AndroidAnimationsActions'
+//
+//                developers {
+//                    developer {
+//                        id 'dtx12'
+//                        name 'Bogdan Kiselev'
+//                        email 'dtx1212@gmail.com'
+//                    }
+//                }
+//
+//                licenses {
+//                    license {
+//                        name 'MIT'
+//                        url 'http://opensource.org/licenses/mit-license.php'
+//                    }
+//                }
+//
+//                scm {
+//                    url 'https://github.com/dtx12/AndroidAnimationsActions'
+//                    connection 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//                    developerConnection 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//                }
+//            }
+//        }
+//    }
+//}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

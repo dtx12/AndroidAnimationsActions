@@ -238,6 +238,24 @@ public final class Actions {
         return move(x, y, duration, interpolator, ActionType.MOVE_BY);
     }
 
+    @NonNull
+    public static Animator resizeBy(float x, float y, float duration, @Nullable Interpolator interpolator) {
+        return resize(x, y, duration, interpolator, ActionType.RESIZE_BY);
+    }
+    @NonNull
+    public static Animator resizeTo(float x, float y, float duration, @Nullable Interpolator interpolator) {
+        return resize(x, y, duration, interpolator, ActionType.RESIZE_TO);
+    }
+
+    @NonNull
+    private static Animator resize(float x, float y, float duration, @Nullable Interpolator interpolator, @NonNull ActionType type) {
+        TypedAction action = new TypedAction();
+        setPropertiesForAnimator(action, duration, interpolator);
+        action.setFloatTargets(x, y);
+        action.setType(type);
+        return action;
+    }
+
     /**
      * Moves view to specified x, y instantly
      *
@@ -282,6 +300,7 @@ public final class Actions {
         action.setType(type);
         return action;
     }
+
 
     /**
      * Scales view to specified scaleX, scaleY instantly
