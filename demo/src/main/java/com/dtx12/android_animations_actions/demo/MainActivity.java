@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         play(sequence(color(-1, Color.GREEN), moveTo(targetX, targetY)), view);
 
         float startY = dpToPx(93);
-        float endY = dpToPx(248);
+        float endY = dpToPx(2000);
         float x = -93;
         play(sequence(
                 parallel(sizeTo(startY, startY, 1f)),
