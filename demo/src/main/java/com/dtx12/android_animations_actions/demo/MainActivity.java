@@ -1,5 +1,6 @@
 package com.dtx12.android_animations_actions.demo;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -31,7 +32,6 @@ import static com.dtx12.android_animations_actions.actions.Actions.rotateBy;
 import static com.dtx12.android_animations_actions.actions.Actions.run;
 import static com.dtx12.android_animations_actions.actions.Actions.scaleTo;
 import static com.dtx12.android_animations_actions.actions.Actions.sequence;
-import static com.dtx12.android_animations_actions.actions.Actions.sizeBy;
 import static com.dtx12.android_animations_actions.actions.Actions.sizeTo;
 
 
@@ -153,6 +153,23 @@ public class MainActivity extends AppCompatActivity {
 
         play(sequence(color(-1, Color.GREEN), moveTo(targetX, targetY)), view);
 
-        play(forever(sequence(sizeTo(size * 2, size * 2, 1f), (sizeBy(size, size, 1f)))), view);
+        float startY = dpToPx(93);
+        float endY = dpToPx(248);
+        float x = -93;
+        play(sequence(
+                parallel(sizeTo(startY, startY, 1f)),
+                forever(sequence(
+                        sizeTo(startY, endY, 1f),
+                        sizeTo(startY, startY, 1f)))
+        ), view);
+    }
+
+    public static float dpToPx(final int dp) {
+        final float scale = getDensity();
+        return (dp * scale + 0.5f);
+    }
+
+    public static float getDensity() {
+        return Resources.getSystem().getDisplayMetrics().density;
     }
 }

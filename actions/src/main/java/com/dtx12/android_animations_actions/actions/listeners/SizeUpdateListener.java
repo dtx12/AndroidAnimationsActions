@@ -41,6 +41,6 @@ public class SizeUpdateListener extends BaseUpdateListener {
         final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.width = (int) x;
         layoutParams.height = (int) y;
-        view.requestLayout();
+        view.getRootView().invalidate();
     }
 }
