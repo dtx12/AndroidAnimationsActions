@@ -6,13 +6,16 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dtx12.android_animations_actions.actions.Interpolations;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import butterknife.Bind;
@@ -37,12 +40,18 @@ import static com.dtx12.android_animations_actions.actions.Actions.sizeTo;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.firstAnimContainer)
-    protected LinearLayout firstAnimContainer;
+    protected ViewGroup firstAnimContainer;
     @Bind(R.id.secondAnimContainer)
-    protected FrameLayout secondAnimContainer;
+    protected ViewGroup secondAnimContainer;
+
     @Bind(R.id.thirdAnimContainer)
-    protected FrameLayout thirdAnimContainer;
+    protected ViewGroup thirdAnimContainer;
+
+    @Bind(R.id.circle)
+    protected ImageView circle;
+
     private Random random = new Random();
 
     @Override
@@ -50,12 +59,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        play(parallel(fadeIn(), sizeTo(0f, 0f, 0)), circle);
     }
 
     private void reset() {
         firstAnimContainer.removeAllViews();
         secondAnimContainer.removeAllViews();
-        thirdAnimContainer.removeAllViews();
+        // thirdAnimContainer.removeAllViews();
     }
 
     @OnClick(R.id.playSecondAnim)
@@ -135,33 +145,28 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.playThirdAnim)
     protected void playThirdAnimation() {
-        reset();
+        //reset();
 
-        int size = getResources().getDimensionPixelSize(R.dimen.circle_size);
-        int margin = getResources().getDimensionPixelSize(R.dimen.circle_margin);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-        params.leftMargin = margin;
-        params.rightMargin = margin;
-        params.gravity = Gravity.CENTER;
-        ImageView view = new ImageView(this);
-        view.setLayoutParams(params);
-        view.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.circle));
-        thirdAnimContainer.addView(view);
+        float duration = 5f;
 
-        float targetX = thirdAnimContainer.getWidth() / 2f;
-        float targetY = thirdAnimContainer.getHeight() / 2f - size / 2;
+        int size = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-        play(sequence(color(-1, Color.GREEN), moveTo(targetX, targetY)), view);
+        play(forever(duration + 0.5f,
+                sequence(
+                        run(new Runnable() {
 
-        float startY = dpToPx(93);
-        float endY = dpToPx(2000);
-        float x = -93;
-        play(sequence(
-                parallel(sizeTo(startY, startY, 1f)),
-                forever(sequence(
-                        sizeTo(startY, endY, 1f),
-                        sizeTo(startY, startY, 1f)))
-        ), view);
+                            long time = Calendar.getInstance().getTimeInMillis();
+
+                            @Override
+                            public void run() {
+                                long t = Calendar.getInstance().getTimeInMillis();
+                                Log.v(TAG, "dt=" + (t - time));
+                                time = t;
+                            }
+                        }),
+                        parallel(fadeIn(), sizeTo(0, 0, 0)),
+                        parallel(fadeOut(duration), sizeTo(size, size, duration))
+                )), circle);
     }
 
     public static float dpToPx(final int dp) {

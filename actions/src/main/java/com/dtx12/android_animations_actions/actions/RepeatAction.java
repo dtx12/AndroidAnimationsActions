@@ -29,8 +29,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
+import android.util.Log;
 
 class RepeatAction extends ValueAnimator {
+
+    private static final String TAG = RepeatAction.class.getSimpleName();
     private final Animator animator;
 
     RepeatAction(int repeatCount, Animator animator) {
@@ -55,6 +58,8 @@ class RepeatAction extends ValueAnimator {
 
     private long countDuration(Animator animator) {
         long duration = 0;
+        Log.v(TAG, "[countDuration] " + animator.getClass().getSimpleName());
+
         if (animator instanceof AnimatorSet) {
             for (Animator child : ((AnimatorSet) animator).getChildAnimations()) {
                 duration += countDuration(child);

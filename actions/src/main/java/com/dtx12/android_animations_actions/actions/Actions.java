@@ -51,6 +51,10 @@ public final class Actions {
      * @param animator action to repeat
      */
     @NonNull
+    public static Animator forever(float duration, @NonNull Animator animator) {
+        return repeat(-1, duration, animator);
+    }
+
     public static Animator forever(@NonNull Animator animator) {
         return repeat(-1, animator);
     }
@@ -62,6 +66,13 @@ public final class Actions {
      * @param animator action to repeat
      */
     @NonNull
+    public static Animator repeat(final int count, float duration, @NonNull Animator animator) {
+        if (count <= 1 && count != -1)
+            return animator;
+
+        return new RepeatAction(count, animator).setDuration((long) (duration * 1000f));
+    }
+
     public static Animator repeat(final int count, @NonNull Animator animator) {
         if (count <= 1 && count != -1)
             return animator;
