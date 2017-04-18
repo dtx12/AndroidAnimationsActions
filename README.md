@@ -6,7 +6,7 @@ Actions for android animations. Inspired by libgdx scene2d actions.
 The main goal of this project is making creating of complex animations easier.
 You may create animations like in demo with just a couple lines of code.
 
-##Actions
+## Actions
 `sequence` - executes actions sequentially <br/>
 `delay` - inserts pause into sequence <br/>
 `run` - will run target runnable, useful in sequences <br/>
@@ -26,7 +26,7 @@ You may create animations like in demo with just a couple lines of code.
 
 `play` - plays specified action on specified view<br/>
 
-##Interpolations
+## Interpolations
 Library contains class `Interpolations` with different predefined interpolations which may be useful for animations.
 
 ## Demo
