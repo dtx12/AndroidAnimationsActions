@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
  * values that represent ARGB colors.
  */
 class ArgbEvaluator implements TypeEvaluator {
+
     private static final ArgbEvaluator sInstance = new ArgbEvaluator();
 
     /**

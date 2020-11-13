@@ -1,31 +1,23 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
-    }
-}
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-kapt'
+// apply plugin: 'com.jfrog.bintray'
 
-repositories {
-    jcenter()
-}
-
-version = "0.1.4"
+version = "1.0.0"
 group = "com.dtx12"
 
+kapt {
+    useBuildCache = true
+}
+
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -35,82 +27,119 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // region compile options
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // endregion
+
+    // region compile options
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    // endregion
+
+    // region lint options
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // endregion
+
+    // region dex options
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 8
+    }
+
+    // endregion
+
+    // region adb options
+
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000 // 10 minutes
+    }
+
+    // endregion
+
+    // region exclude duplicated meta inf files
+
+    packagingOptions {
+        exclude 'META-INF/app_debug.kotlin_module'
+        exclude 'META-INF/library-core_release.kotlin_module'
+    }
+
+    // endregion
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    configurations = ['archives']
-    pkg {
-        repo = 'maven'
-        name = 'animations-actions'
-        desc = 'Actions for android animations. Inspired by libgdx scene2d actions.'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/dtx12/AndroidAnimationsActions.git'
-        issueTrackerUrl = 'https://github.com/dtx12/AndroidAnimationsActions/issues'
-        labels = ['android', 'animations', 'actions']
-        publicDownloadNumbers = true
-        publish = true
-    }
-}
+//bintray {
+//    user = System.getenv('BINTRAY_USER')
+//    key = System.getenv('BINTRAY_KEY')
+//    configurations = ['archives']
+//    pkg {
+//        repo = 'maven'
+//        name = 'animations-actions'
+//        desc = 'Actions for android animations. Inspired by libgdx scene2d actions.'
+//        licenses = ['MIT']
+//        vcsUrl = 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//        issueTrackerUrl = 'https://github.com/dtx12/AndroidAnimationsActions/issues'
+//        labels = ['android', 'animations', 'actions']
+//        publicDownloadNumbers = true
+//        publish = true
+//    }
+//}
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 }
 
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                groupId 'com.dtx12'
-                artifactId 'actions'
-                name "Android Animations as Actions"
-                description 'Actions for android animations. Inspired by libgdx scene2d actions.'
-                url 'https://github.com/dtx12/AndroidAnimationsActions'
+//install {
+//    repositories.mavenInstaller {
+//        pom {
+//            project {
+//                packaging 'aar'
+//                groupId 'com.dtx12'
+//                artifactId 'actions'
+//                name "Android Animations as Actions"
+//                description 'Actions for android animations. Inspired by libgdx scene2d actions.'
+//                url 'https://github.com/dtx12/AndroidAnimationsActions'
+//
+//                developers {
+//                    developer {
+//                        id 'dtx12'
+//                        name 'Bogdan Kiselev'
+//                        email 'dtx1212@gmail.com'
+//                    }
+//                }
+//
+//                licenses {
+//                    license {
+//                        name 'MIT'
+//                        url 'http://opensource.org/licenses/mit-license.php'
+//                    }
+//                }
+//
+//                scm {
+//                    url 'https://github.com/dtx12/AndroidAnimationsActions'
+//                    connection 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//                    developerConnection 'https://github.com/dtx12/AndroidAnimationsActions.git'
+//                }
+//            }
+//        }
+//    }
+//}
 
-                developers {
-                    developer {
-                        id 'dtx12'
-                        name 'Bogdan Kiselev'
-                        email 'dtx1212@gmail.com'
-                    }
-                }
 
-                licenses {
-                    license {
-                        name 'MIT'
-                        url 'http://opensource.org/licenses/mit-license.php'
-                    }
-                }
+apply from: "https://raw.githubusercontent.com/exozet/Android-Dependencies/master/javadoc.gradle"
 
-                scm {
-                    url 'https://github.com/dtx12/AndroidAnimationsActions'
-                    connection 'https://github.com/dtx12/AndroidAnimationsActions.git'
-                    developerConnection 'https://github.com/dtx12/AndroidAnimationsActions.git'
-                }
-            }
-        }
-    }
-}
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
