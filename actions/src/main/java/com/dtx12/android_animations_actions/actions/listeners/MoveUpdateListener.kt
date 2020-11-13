@@ -33,7 +33,9 @@ import android.view.View
 class MoveUpdateListener(view: View) : BaseUpdateListener(view) {
 
     override fun onAnimationUpdate(view: View, animation: ValueAnimator) {
-        view.x = animation.getAnimatedValue("x") as Float
-        view.y = animation.getAnimatedValue("y") as Float
+        val x = animation.getAnimatedValue("x") as Float
+        val y = animation.getAnimatedValue("y") as Float
+        view.x = x
+        view.y = y
     }
 }

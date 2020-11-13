@@ -28,5 +28,14 @@
 package com.dtx12.android_animations_actions.actions
 
 internal enum class ActionType {
-    ALPHA, SCALE_TO, SCALE_BY, SIZE_TO, SIZE_BY, ROTATE_TO, ROTATE_BY, COLOR, MOVE_TO, MOVE_BY
+    ALPHA,
+    SCALE_TO,
+    SCALE_BY,
+    SIZE_TO,
+    SIZE_BY,
+    ROTATE_TO,
+    ROTATE_BY,
+    COLOR,
+    MOVE_TO,
+    MOVE_BY
 }

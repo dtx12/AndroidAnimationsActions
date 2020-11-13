@@ -13,18 +13,6 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.dtx12.android_animations_actions.actions.Actions
-import com.dtx12.android_animations_actions.actions.Actions.color
-import com.dtx12.android_animations_actions.actions.Actions.delay
-import com.dtx12.android_animations_actions.actions.Actions.fadeIn
-import com.dtx12.android_animations_actions.actions.Actions.fadeOut
-import com.dtx12.android_animations_actions.actions.Actions.forever
-import com.dtx12.android_animations_actions.actions.Actions.moveBy
-import com.dtx12.android_animations_actions.actions.Actions.moveTo
-import com.dtx12.android_animations_actions.actions.Actions.parallel
-import com.dtx12.android_animations_actions.actions.Actions.play
-import com.dtx12.android_animations_actions.actions.Actions.rotateBy
-import com.dtx12.android_animations_actions.actions.Actions.scaleTo
-import com.dtx12.android_animations_actions.actions.Actions.sizeTo
 import com.dtx12.android_animations_actions.actions.Interpolations
 import com.dtx12.android_animations_actions.demo.databinding.ActivityMainBinding
 import java.util.*
@@ -48,7 +36,7 @@ class MainActivity() : AppCompatActivity() {
 
             setContentView(root)
 
-            play(parallel(fadeIn(), sizeTo(0f, 0f, 0f)), binder.circle)
+            Actions.play(Actions.parallel(Actions.fadeIn(), Actions.sizeTo(0f, 0f, 0f)), binder.circle)
 
             playFirstAnim.setOnClickListener {
                 playFirstAnimation()
@@ -70,7 +58,7 @@ class MainActivity() : AppCompatActivity() {
         // thirdAnimContainer.removeAllViews();
     }
 
-    protected fun playFirstAnimation() = with(binder) {
+    protected fun playFirstAnimation() {
         reset()
         for (i in 0..5) {
             val size = resources.getDimensionPixelSize(R.dimen.circle_size)
@@ -83,31 +71,30 @@ class MainActivity() : AppCompatActivity() {
             view.layoutParams = params
             view.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.circle))
             val delay = random.nextFloat()
-            val targetY = random.nextInt((firstAnimContainer.bottom / 4f).toInt()).toFloat()
-            play(
+            val targetY = random.nextInt((binder.firstAnimContainer.bottom / 4f).toInt()).toFloat()
+            Actions.play(
                 Actions.sequence(
-                    fadeOut(),
-                    scaleTo(1.5f, 1.5f),
-                    fadeIn(2f),
-                    delay(delay),
-                    parallel(
-                        moveBy(0f, targetY, 2f, Interpolations.ElasticEaseOut),
+                    Actions.fadeOut(),
+                    Actions.scaleTo(1.5f, 1.5f),
+                    Actions.fadeIn(2f),
+                    Actions.delay(delay),
+                    Actions.parallel(
+                        Actions.moveBy(0f, targetY, 2f, Interpolations.ElasticEaseOut),
                         Actions.sequence(
-                            color(-1, Color.GREEN, 1f),
-                            color(Color.GREEN, Color.RED, 1f)
+                            Actions.color(-1, Color.GREEN, 1f),
+                            Actions.color(Color.GREEN, Color.RED, 1f)
                         ),
-                        scaleTo(1f, 1f, 2f, Interpolations.ElasticEaseOut)
+                        Actions.scaleTo(1f, 1f, 2f, Interpolations.ElasticEaseOut)
                     )
                 ), view
             )
-            firstAnimContainer.addView(view)
+            binder.firstAnimContainer.addView(view)
         }
     }
 
-    protected fun playSecondAnim() = with(binder) {
+    protected fun playSecondAnim() {
         reset()
-        val center =
-            Point(secondAnimContainer.measuredWidth / 2, secondAnimContainer.measuredHeight / 2)
+        val center = Point(binder.secondAnimContainer.measuredWidth / 2, binder.secondAnimContainer.measuredHeight / 2)
         val size = resources.getDimensionPixelSize(R.dimen.circle_size)
         var delay = 0f
         for (i in 0..5) {
@@ -124,13 +111,13 @@ class MainActivity() : AppCompatActivity() {
                 4 -> newPos[center.x * 2 - size] = center.y
                 5 -> newPos[center.x * 2 - size] = center.y * 2 - size
             }
-            play(
+            Actions.play(
                 Actions.sequence(
-                    parallel(fadeOut(), color(-1, Color.BLUE)),
-                    moveTo(center.x.toFloat(), center.y.toFloat()),
-                    fadeIn(.5f),
-                    parallel(
-                        moveTo(
+                    Actions.parallel(Actions.fadeOut(), Actions.color(-1, Color.BLUE)),
+                    Actions.moveTo(center.x.toFloat(), center.y.toFloat()),
+                    Actions.fadeIn(.5f),
+                    Actions.parallel(
+                        Actions.moveTo(
                             newPos.x.toFloat(),
                             newPos.y.toFloat(),
                             1f,
@@ -139,12 +126,12 @@ class MainActivity() : AppCompatActivity() {
                     ),
                     Actions.run(
                         Runnable {
-                            play(
+                            Actions.play(
                                 Actions.sequence(
-                                    color(Color.BLUE, Color.GREEN, .1f), forever(
+                                    Actions.color(Color.BLUE, Color.GREEN, 1f), Actions.forever(
                                         Actions.sequence(
-                                            color(Color.GREEN, Color.RED, 1f),
-                                            color(
+                                            Actions.color(Color.GREEN, Color.RED, 1f),
+                                            Actions.color(
                                                 Color.GREEN, Color.RED, 1f
                                             )
                                         )
@@ -152,31 +139,31 @@ class MainActivity() : AppCompatActivity() {
                                 ), view
                             )
                         }),
-                    parallel(
-                        rotateBy(720f, 2f, Interpolations.BackEaseOut), Actions.sequence(
-                            scaleTo(.5f, .5f, 1f, Interpolations.BackEaseOut),
-                            scaleTo(1f, 1f, 1f, Interpolations.ElasticEaseOut)
+                    Actions.parallel(
+                        Actions.rotateBy(720f, 2f, Interpolations.BackEaseOut), Actions.sequence(
+                            Actions.scaleTo(.5f, .5f, 1f, Interpolations.BackEaseOut),
+                            Actions.scaleTo(1f, 1f, 1f, Interpolations.ElasticEaseOut)
                         )
                     ),
                     Actions.sequence(
-                        delay(delay), parallel(
-                            fadeOut(.5f, Interpolations.ExponentialEaseOut),
-                            scaleTo(0f, 1f, .5f, Interpolations.ExponentialEaseOut)
+                        Actions.delay(delay), Actions.parallel(
+                            Actions.fadeOut(.5f, Interpolations.ExponentialEaseOut),
+                            Actions.scaleTo(0f, 1f, .5f, Interpolations.ExponentialEaseOut)
                         )
                     )
                 ), view
             )
             delay += 1f
-            secondAnimContainer.addView(view)
+            binder.secondAnimContainer.addView(view)
         }
     }
 
-    protected fun playThirdAnimation() = with(binder) {
+    protected fun playThirdAnimation() {
         //reset();
         val duration = 5f
         val size = Resources.getSystem().displayMetrics.heightPixels
-        play(
-            forever(
+        Actions.play(
+            Actions.forever(
                 duration + 0.5f,
                 Actions.sequence(
                     Actions.run(object : Runnable {
@@ -187,13 +174,13 @@ class MainActivity() : AppCompatActivity() {
                             time = t
                         }
                     }),
-                    parallel(fadeIn(), sizeTo(0f, 0f, 0f)),
-                    parallel(
-                        fadeOut(duration),
-                        sizeTo(size.toFloat(), size.toFloat(), duration)
+                    Actions.parallel(Actions.fadeIn(), Actions.sizeTo(0f, 0f, 0f)),
+                    Actions.parallel(
+                        Actions.fadeOut(duration),
+                        Actions.sizeTo(size.toFloat(), size.toFloat(), duration)
                     )
                 )
-            ), circle
+            ), binder.circle
         )
     }
 
