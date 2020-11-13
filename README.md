@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/kibotu/AndroidAnimationsActions.svg)](https://jitpack.io/#kibotu/AndroidAnimationsActions)
+
 [![Android Gems](http://www.android-gems.com/badge/dtx12/AndroidAnimationsActions.svg?branch=master)](http://www.android-gems.com/lib/dtx12/AndroidAnimationsActions)
 
 # Android Animations Actions
@@ -34,12 +36,15 @@ For better quality please check package demo in the project.
 ![](http://i.imgur.com/EueRBrp.gif)
 
 ## Gradle
-```java
-repositories {
-    jcenter()
-}
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 
-dependencies {
-    compile 'com.dtx12:actions:0.1.4'
-}
+    dependencies {
+        implementation 'com.dtx12:actions:2.0.0'
+    }
 ```
