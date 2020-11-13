@@ -33,11 +33,9 @@ import android.view.View
 class SizeUpdateListener(view: View) : BaseUpdateListener(view) {
 
     override fun onAnimationUpdate(view: View, animation: ValueAnimator) {
-        val x = animation.getAnimatedValue("x") as Float
-        val y = animation.getAnimatedValue("y") as Float
         val layoutParams = view.layoutParams
-        layoutParams.width = x.toInt()
-        layoutParams.height = y.toInt()
+        layoutParams.width = (animation.getAnimatedValue("x") as Float).toInt()
+        layoutParams.height = (animation.getAnimatedValue("y") as Float).toInt()
         view.requestLayout()
     }
 }
