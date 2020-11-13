@@ -1,22 +1,24 @@
 buildscript {
     repositories {
+        google()
+        maven { url 'https://maven-central-eu.storage-download.googleapis.com/repos/central/data/' }
+        maven { url 'https://plugins.gradle.org/m2/' }
         jcenter()
     }
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10"
+        classpath "org.jetbrains.kotlin.kapt:org.jetbrains.kotlin.kapt.gradle.plugin:1.4.10"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.0'
 }
 
 task clean(type: Delete) {

@@ -1,31 +1,121 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
-repositories {
-    jcenter()
+kapt {
+    useBuildCache = true
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "com.dtx12.android_animations_actions.demo"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        try {
+            debug {
+                storeFile file(DEBUG_KEYSYORE_PATH)
+                storePassword DEBUG_STORE_PASSWORD
+                keyAlias DEBUG_KEYSTORE_ALLIAS
+                keyPassword DEBUG_KEY_PASSWORD
+            }
+        }
+        catch (final ignored) {
+            throw new java.security.spec.InvalidKeySpecException('You should define DEBUG_KEYSTORE_ALLIAS, DEBUG_STORE_PASSWORD, DEBUG_KEY_PASSWORD in gradle.properties.')
+        }
+        try {
+            release {
+                storeFile file(RELEASE_KEYSYORE_PATH)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEYSTORE_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        } catch (final ignored) {
+            throw new java.security.spec.InvalidKeySpecException('You should define RELEASE_KEYSTORE_ALIAS, RELEASE_STORE_PASSWORD, RELEASE_KEY_PASSWORD in gradle.properties.')
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.debug
+            pseudoLocalesEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled false
+            shrinkResources = false
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // region view binding
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    // endregion
+
+    // region compile options
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // endregion
+
+    // region compile options
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    // endregion
+
+    // region lint options
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // endregion
+
+    // region dex options
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 8
+    }
+
+    // endregion
+
+    // region adb options
+
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000 // 10 minutes
+    }
+
+    // endregion
 }
 
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile project(':actions')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(':actions')
 }
